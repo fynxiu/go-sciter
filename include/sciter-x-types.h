@@ -48,6 +48,10 @@ enum GFX_LAYER
   #define WINDOWLESS
 #endif
 
+#ifndef BOOL
+  typedef int BOOL;
+#endif 
+
 #ifndef SBOOL
   typedef int SBOOL;
 #endif

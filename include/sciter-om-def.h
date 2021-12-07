@@ -56,7 +56,7 @@ enum som_passport_flags {
 
 // definiton of object (the thing) access interface
 // this structure should be statically allocated - at least survive last instance of the engine
-typedef struct som_passport_t {
+struct som_passport_t {
   UINT64             flags;
   som_atom_t         name;         // class name
   const som_property_def_t* properties; size_t n_properties; // virtual property thunks
@@ -67,7 +67,7 @@ typedef struct som_passport_t {
   // any property "inteceptors"
   som_any_prop_getter_t  prop_getter;  // var prop_val = thing.k;
   som_any_prop_setter_t  prop_setter;  // thing.k = prop_val;
-} som_passport_t;
+};
 
 #ifdef CPP11
 
@@ -83,8 +83,15 @@ typedef struct som_passport_t {
     &sciter::om::member_property<TC,decltype(TC::name),&TC::name>::getter,\
     &sciter::om::member_property<TC,decltype(TC::name),&TC::name>::setter)
 
+#define SOM_PROP_EX(ename,pname) som_property_def_t(#ename,\
+    &sciter::om::member_property<TC,decltype(TC::pname),&TC::pname>::getter,\
+    &sciter::om::member_property<TC,decltype(TC::pname),&TC::pname>::setter)
+
 #define SOM_RO_PROP(name) som_property_def_t(#name, \
     &sciter::om::member_property<TC,decltype(TC::name),&TC::name>::getter)
+
+#define SOM_RO_PROP_EX(ename,pname) som_property_def_t(#ename, \
+    &sciter::om::member_property<TC,decltype(TC::pname),&TC::pname>::getter)
 
 #define SOM_VIRTUAL_PROP(name,prop_getter,prop_setter) som_property_def_t(#name, \
     &sciter::om::member_getter_function<decltype(&TC::prop_getter)>::thunk<&TC::prop_getter>,\
@@ -533,7 +540,7 @@ namespace sciter {
       };
 
       template <class Type> struct prop_get_accessor;
-
+            
 
       // bool get_any_prop(const std::string& name, TV& val);
       template <class Type, class TV>

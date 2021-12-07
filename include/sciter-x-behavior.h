@@ -1,10 +1,10 @@
 /*
  * The Sciter Engine of Terra Informatica Software, Inc.
  * http://sciter.com
- *
+ * 
  * The code and information provided "as-is" without
  * warranty of any kind, either expressed or implied.
- *
+ * 
  * (C) 2003-2015, Terra Informatica Software, Inc.
  */
 
@@ -78,19 +78,19 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     // see: http://www.w3.org/TR/xml-events/Overview.html#s_intro
   };
 
-  enum MOUSE_BUTTONS
+  typedef enum MOUSE_BUTTONS
   {
       MAIN_MOUSE_BUTTON = 1, //aka left button
       PROP_MOUSE_BUTTON = 2, //aka right button
       MIDDLE_MOUSE_BUTTON = 4,
-  };
+  } MOUSE_BUTTONS;
 
-  enum KEYBOARD_STATES
+  typedef enum KEYBOARD_STATES
   {
       CONTROL_KEY_PRESSED = 0x1,
       SHIFT_KEY_PRESSED = 0x2,
       ALT_KEY_PRESSED = 0x4
-  };
+  } KEYBOARD_STATES;
 
 // parameters of evtg == HANDLE_INITIALIZATION
 
@@ -105,11 +105,11 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     UINT cmd; // INITIALIZATION_EVENTS
   };
 
-  typedef enum SOM_EVENTS
+  enum SOM_EVENTS
   {
     SOM_GET_PASSPORT = 0,
     SOM_GET_ASSET = 1
-  } SOM_EVENTS;
+  };
 
   typedef struct SOM_PARAMS
   {
@@ -132,7 +132,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
 
 // parameters of evtg == HANDLE_MOUSE
 
-  enum MOUSE_EVENTS
+  typedef enum MOUSE_EVENTS
   {
       MOUSE_ENTER = 0,
       MOUSE_LEAVE,
@@ -144,9 +144,9 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       MOUSE_TICK, // mouse pressed ticks
       MOUSE_IDLE, // mouse stay idle for some time
 
-      /*OBSOLETE*/ DROP        = 9,   // item dropped, target is that dropped item
-      /*OBSOLETE*/ DRAG_ENTER  = 0xA, // drag arrived to the target element that is one of current drop targets.
-      /*OBSOLETE*/ DRAG_LEAVE  = 0xB, // drag left one of current drop targets. target is the drop target element.
+      /*OBSOLETE*/ DROP        = 9,   // item dropped, target is that dropped item 
+      /*OBSOLETE*/ DRAG_ENTER  = 0xA, // drag arrived to the target element that is one of current drop targets.  
+      /*OBSOLETE*/ DRAG_LEAVE  = 0xB, // drag left one of current drop targets. target is the drop target element.  
       /*OBSOLETE*/ DRAG_REQUEST = 0xC,  // drag src notification before drag start. To cancel - return true from handler.
 
       MOUSE_TCLICK = 0xF, // tripple click
@@ -160,11 +160,11 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
 
       /*OBSOLETE*/ DRAGGING = 0x100, // ORed with MOUSE_ENTER...MOUSE_DOWN codes above
 
-      MOUSE_HIT_TEST = 0xFFE,    // sent to element, allows to handle elements with non-trivial shapes.
+      MOUSE_HIT_TEST = 0xFFE,    // sent to element, allows to handle elements with non-trivial shapes. 
 
-  };
+  } MOUSE_EVENTS;
 
-  struct MOUSE_PARAMS
+  typedef struct MOUSE_PARAMS
   {
       UINT      cmd;          // MOUSE_EVENTS
       HELEMENT  target;       // target element
@@ -176,11 +176,11 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       SBOOL      is_on_icon;   // mouse is over icon (foreground-image, foreground-repeat:no-repeat)
 
       HELEMENT  dragging;     // element that is being dragged over, this field is not NULL if (cmd & DRAGGING) != 0
-      UINT      dragging_mode;// see DRAGGING_TYPE.
+      UINT      dragging_mode;// see DRAGGING_TYPE. 
 
-  };
+  } MOUSE_PARAMS;
 
-  enum CURSOR_TYPE
+  typedef enum CURSOR_TYPE
   {
       CURSOR_ARROW, //0
       CURSOR_IBEAM, //1
@@ -198,25 +198,25 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       CURSOR_HAND,        //13
       CURSOR_DRAG_MOVE,   //14
       CURSOR_DRAG_COPY,   //15
-  };
+  } CURSOR_TYPE;
 
 
 // parameters of evtg == HANDLE_KEY
 
-  enum KEY_EVENTS
+  typedef enum KEY_EVENTS
   {
       KEY_DOWN = 0,
       KEY_UP,
       KEY_CHAR
-  };
+  } KEY_EVENTS;
 
-  struct KEY_PARAMS
+  typedef struct KEY_PARAMS
   {
       UINT      cmd;          // KEY_EVENTS
       HELEMENT  target;       // target element
       UINT      key_code;     // key scan code, or character unicode for KEY_CHAR
       UINT      alt_state;    // KEYBOARD_STATES
-  };
+  } KEY_PARAMS;
 
 
   /** #HANDLE_FOCUS commands */
@@ -277,19 +277,19 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
   enum SCROLL_SOURCE {
     SCROLL_SOURCE_UNKNOWN,
     SCROLL_SOURCE_KEYBOARD,  // SCROLL_PARAMS::reason <- keyCode
-    SCROLL_SOURCE_SCROLLBAR, // SCROLL_PARAMS::reason <- SCROLLBAR_PART
+    SCROLL_SOURCE_SCROLLBAR, // SCROLL_PARAMS::reason <- SCROLLBAR_PART 
     SCROLL_SOURCE_ANIMATOR,
     SCROLL_SOURCE_WHEEL,
   };
 
   enum SCROLLBAR_PART {
-    SCROLLBAR_BASE,
-    SCROLLBAR_PLUS,
-    SCROLLBAR_MINUS,
-    SCROLLBAR_SLIDER,
-    SCROLLBAR_PAGE_MINUS,
-    SCROLLBAR_PAGE_PLUS,
-    SCROLLBAR_CORNER,
+    SCROLLBAR_BASE,       
+    SCROLLBAR_PLUS,       
+    SCROLLBAR_MINUS,      
+    SCROLLBAR_SLIDER,     
+    SCROLLBAR_PAGE_MINUS, 
+    SCROLLBAR_PAGE_PLUS,  
+    SCROLLBAR_CORNER,     
   };
 
 
@@ -317,14 +317,14 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     GESTURE_TAP2,   // The two-finger tap gesture, a.k.a. right-click
     GESTURE_DOUBLE_TAP
   };
-  enum GESTURE_STATE
+  enum GESTURE_STATE 
   {
     GESTURE_STATE_BEGIN   = 1, // starts
     GESTURE_STATE_INERTIA = 2, // events generated by inertia processor
     GESTURE_STATE_END     = 4, // end, last event of the gesture sequence
   };
 
-  enum GESTURE_TYPE_FLAGS // requested
+  enum GESTURE_TYPE_FLAGS // requested 
   {
     GESTURE_FLAG_ZOOM               = 0x0001,
     GESTURE_FLAG_ROTATE             = 0x0002,
@@ -344,23 +344,23 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     HELEMENT  target;       // target element
     POINT     pos;          // position of cursor, element relative
     POINT     pos_view;     // position of cursor, view relative
-    UINT      flags;        // for GESTURE_REQUEST combination of GESTURE_FLAGs.
+    UINT      flags;        // for GESTURE_REQUEST combination of GESTURE_FLAGs. 
                             // for others it is a combination of GESTURE_STATe's
     UINT      delta_time;   // period of time from previous event.
-    SIZE      delta_xy;     // for GESTURE_PAN it is a direction vector
-    double    delta_v;      // for GESTURE_ROTATE - delta angle (radians)
-                            // for GESTURE_ZOOM - zoom value, is less or greater than 1.0
+    SIZE      delta_xy;     // for GESTURE_PAN it is a direction vector 
+    double    delta_v;      // for GESTURE_ROTATE - delta angle (radians) 
+                            // for GESTURE_ZOOM - zoom value, is less or greater than 1.0    
   };
 
   enum EXCHANGE_CMD {
     X_DRAG_ENTER = 0,       // drag enters the element
-    X_DRAG_LEAVE = 1,       // drag leaves the element
+    X_DRAG_LEAVE = 1,       // drag leaves the element  
     X_DRAG = 2,             // drag over the element
-    X_DROP = 3,             // data dropped on the element
+    X_DROP = 3,             // data dropped on the element  
     X_PASTE = 4,            // N/A
     X_DRAG_REQUEST = 5,     // N/A
     X_DRAG_CANCEL = 6,      // drag cancelled (e.g. by pressing VK_ESCAPE)
-    X_WILL_ACCEPT_DROP = 7, // drop target element shall consume this event in order to receive X_DROP
+    X_WILL_ACCEPT_DROP = 7, // drop target element shall consume this event in order to receive X_DROP 
   };
 
   enum DD_MODES {
@@ -370,7 +370,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     DD_MODE_COPY_OR_MOVE = 3, // DROPEFFECT_COPY	( 1 ) | DROPEFFECT_MOVE	( 2 )
     DD_MODE_LINK = 4, // DROPEFFECT_LINK	( 4 )
   };
-
+  
   struct EXCHANGE_PARAMS
   {
     UINT         cmd;          // EXCHANGE_EVENTS
@@ -378,7 +378,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     HELEMENT     source;       // source element (can be null if D&D from external window)
     POINT        pos;          // position of cursor, element relative
     POINT        pos_view;     // position of cursor, view relative
-    UINT         mode;         // DD_MODE
+    UINT         mode;         // DD_MODE 
     SCITER_VALUE data;         // packaged drag data
   };
 
@@ -462,10 +462,10 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
                                      // is sent for example by behavior:richtext when caret position/selection has changed.
 
       FORM_SUBMIT = 0x96,                   // behavior:form detected submission event. BEHAVIOR_EVENT_PARAMS::data field contains data to be posted.
-                                     // BEHAVIOR_EVENT_PARAMS::data is of type T_MAP in this case key/value pairs of data that is about
+                                     // BEHAVIOR_EVENT_PARAMS::data is of type T_MAP in this case key/value pairs of data that is about 
                                      // to be submitted. You can modify the data or discard submission by returning true from the handler.
       FORM_RESET  = 0x97,            // behavior:form detected reset event (from button type=reset). BEHAVIOR_EVENT_PARAMS::data field contains data to be reset.
-                                     // BEHAVIOR_EVENT_PARAMS::data is of type T_MAP in this case key/value pairs of data that is about
+                                     // BEHAVIOR_EVENT_PARAMS::data is of type T_MAP in this case key/value pairs of data that is about 
                                      // to be rest. You can modify the data or discard reset by returning true from the handler.
 
       DOCUMENT_COMPLETE = 0x98,             // document in behavior:frame or root document is complete.
@@ -475,7 +475,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       HISTORY_PRIOR = 0x9B,
       HISTORY_NEXT = 0x9C,
       HISTORY_STATE_CHANGED = 0x9D,  // behavior:history notification - history stack has changed
-
+      
       CLOSE_POPUP = 0x9E,            // close popup request,
       REQUEST_TOOLTIP = 0x9F,        // request tooltip, evt.source <- is the tooltip element.
 
@@ -484,21 +484,23 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       DOCUMENT_CREATED  = 0xC0,      // document created, script namespace initialized. target -> the document
       DOCUMENT_CLOSE_REQUEST = 0xC1, // document is about to be closed, to cancel closing do: evt.data = sciter::value("cancel");
       DOCUMENT_CLOSE    = 0xC2,      // last notification before document removal from the DOM
-      DOCUMENT_READY    = 0xC3,      // document has got DOM structure, styles and behaviors of DOM elements. Script loading run is complete at this moment.
+      DOCUMENT_READY    = 0xC3,      // document has got DOM structure, styles and behaviors of DOM elements. Script loading run is complete at this moment. 
       DOCUMENT_PARSED   = 0xC4,      // document just finished parsing - has got DOM structure. This event is generated before DOCUMENT_READY
 
-      VIDEO_INITIALIZED = 0xD1,      // <video> "ready" notification
-      VIDEO_STARTED     = 0xD2,      // <video> playback started notification
-      VIDEO_STOPPED     = 0xD3,      // <video> playback stoped/paused notification
-      VIDEO_BIND_RQ     = 0xD4,      // <video> request for frame source binding,
+      VIDEO_INITIALIZED = 0xD1,      // <video> "ready" notification   
+      VIDEO_STARTED     = 0xD2,      // <video> playback started notification   
+      VIDEO_STOPPED     = 0xD3,      // <video> playback stoped/paused notification   
+      VIDEO_BIND_RQ     = 0xD4,      // <video> request for frame source binding, 
                                      //   If you want to provide your own video frames source for the given target <video> element do the following:
-                                     //   1. Handle and consume this VIDEO_BIND_RQ request
+                                     //   1. Handle and consume this VIDEO_BIND_RQ request 
                                      //   2. You will receive second VIDEO_BIND_RQ request/event for the same <video> element
                                      //      but this time with the 'reason' field set to an instance of sciter::video_destination interface.
                                      //   3. add_ref() it and store it for example in worker thread producing video frames.
                                      //   4. call sciter::video_destination::start_streaming(...) providing needed parameters
                                      //      call sciter::video_destination::render_frame(...) as soon as they are available
                                      //      call sciter::video_destination::stop_streaming() to stop the rendering (a.k.a. end of movie reached)
+
+      VIDEO_FRAME_REQUEST = 0xD8,    // animation step, a.k.a. animation frame
 
       PAGINATION_STARTS  = 0xE0,     // behavior:pager starts pagination
       PAGINATION_PAGE    = 0xE1,     // behavior:pager paginated page no, reason -> page no
@@ -521,7 +523,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       BY_MOUSE_CLICK,
       BY_KEY_CLICK,
       SYNTHESIZED,       // synthesized, programmatically generated.
-      BY_MOUSE_ON_ICON,
+      BY_MOUSE_ON_ICON,  
   };
 
   enum EDIT_CHANGED_REASON
@@ -561,7 +563,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
   enum BEHAVIOR_METHOD_IDENTIFIERS
   {
     DO_CLICK = 0,
-/*  remnants of HTMLayout API, not used
+/*  remnants of HTMLayout API, not used 
     GET_TEXT_VALUE = 1,
     SET_TEXT_VALUE,
       // p - TEXT_VALUE_PARAMS
@@ -581,15 +583,15 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     SCROLL_BAR_GET_VALUE,
     SCROLL_BAR_SET_VALUE,
 
-    TEXT_EDIT_GET_CARET_POSITION,
+    TEXT_EDIT_GET_CARET_POSITION, 
     TEXT_EDIT_GET_SELECTION_TEXT, // p - TEXT_SELECTION_PARAMS
     TEXT_EDIT_GET_SELECTION_HTML, // p - TEXT_SELECTION_PARAMS
     TEXT_EDIT_CHAR_POS_AT_XY,     // p - TEXT_EDIT_CHAR_POS_AT_XY_PARAMS
     */
 
     IS_EMPTY      = 0xFC,       // p - IS_EMPTY_PARAMS // set VALUE_PARAMS::is_empty (false/true) reflects :empty state of the element.
-    GET_VALUE     = 0xFD,       // p - VALUE_PARAMS
-    SET_VALUE     = 0xFE,       // p - VALUE_PARAMS
+    GET_VALUE     = 0xFD,       // p - VALUE_PARAMS 
+    SET_VALUE     = 0xFE,       // p - VALUE_PARAMS  
 
     FIRST_APPLICATION_METHOD_ID = 0x100
   };
@@ -603,7 +605,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
   } SCRIPTING_METHOD_PARAMS;
 
   // GET_VALUE/SET_VALUE methods params
-  struct VALUE_PARAMS
+  struct VALUE_PARAMS 
   {
     UINT         methodID;
     SCITER_VALUE val;
@@ -630,10 +632,10 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
       LPCBYTE   data;         // data buffer
       UINT      dataSize;     // size of data
       UINT      dataType;     // data type passed "as is" from SciterRequestElementData
-      UINT      status;       // status = 0 (dataSize == 0) - unknown error.
-                              // status = 100..505 - http response status, Note: 200 - OK!
+      UINT      status;       // status = 0 (dataSize == 0) - unknown error. 
+                              // status = 100..505 - http response status, Note: 200 - OK! 
                               // status > 12000 - wininet error code, see ERROR_INTERNET_*** in wininet.h
-      LPCWSTR   uri;          // requested url
+      LPCWSTR   uri;          // requested url 
   } DATA_ARRIVED_PARAMS;
 
 
@@ -650,7 +652,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     struct event_handler_raw // "raw", non-reference counted event handler
     {
       event_handler_raw() {}
-
+      
       virtual void detached  (HELEMENT /*he*/ ) { }
       virtual void attached(HELEMENT /*he*/) { }
 
@@ -706,17 +708,17 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
         {
           return on_scroll( he, params.target, (SCROLL_EVENTS)params.cmd, params.pos, params.vertical );
         }
-
+      
       virtual bool handle_gesture  (HELEMENT he, GESTURE_PARAMS& params )
         {
-          return false;
+          return false;                     
         }
 
       virtual bool handle_exchange(HELEMENT he, EXCHANGE_PARAMS& params)
         {
           return false;
         }
-
+      
       virtual bool handle_draw   (HELEMENT he, DRAW_PARAMS& params )
         {
           return on_draw(he, params.cmd, params.gfx, params.area );
@@ -787,8 +789,8 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
         {
             case SUBSCRIPTIONS_REQUEST:
               {
-                UINT *p = (UINT *)prms;
-                return pThis->subscription( he, *p );
+                UINT *p = (UINT *)prms; 
+                return pThis->subscription( he, *p ); 
               }
             case HANDLE_INITIALIZATION:
               {
@@ -844,7 +846,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
         return true;
       }
     };
-#else
+#else 
     typedef event_handler event_handler_raw;
 #endif
 
@@ -903,7 +905,7 @@ typedef SBOOL SC_CALLBACK SciterBehaviorFactory( LPCSTR, HELEMENT, LPElementEven
     }
 
 // NOTE: no 'override' here as BEGIN/END_FUNCTION_MAP can be declared on classes that do not derive from event_handler,
-//       see CHAIN_FUNCTION_MAP
+//       see CHAIN_FUNCTION_MAP 
 #define BEGIN_FUNCTION_MAP \
     virtual bool on_script_call(HELEMENT he, LPCSTR name, UINT argc, const sciter::value* argv, sciter::value& retval) \
     { \
