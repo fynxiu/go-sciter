@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 	"path/filepath"
-	
-	"github.com/sciter-sdk/go-sciter"
-	"github.com/sciter-sdk/go-sciter/window"
+
+	"github.com/fynxiu/go-sciter"
+	"github.com/fynxiu/go-sciter/window"
 )
 
 func main() {
@@ -13,7 +13,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Create Window Error: ", err)
 	}
-	fullpath, err := filepath.Abs("index.html")
+	fullpath, err := filepath.Abs("./examples/callback/index.html")
 	if err != nil {
 		log.Fatal(err)
 	}

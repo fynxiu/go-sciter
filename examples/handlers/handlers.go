@@ -4,10 +4,10 @@ import (
 	"flag"
 	"log"
 	"path/filepath"
-	
-	"github.com/sciter-sdk/go-sciter"
-	"github.com/sciter-sdk/go-sciter/rice"
-	"github.com/sciter-sdk/go-sciter/window"
+
+	"github.com/fynxiu/go-sciter"
+	"github.com/fynxiu/go-sciter/rice"
+	"github.com/fynxiu/go-sciter/window"
 )
 
 func setEventHandler(w *window.Window) {

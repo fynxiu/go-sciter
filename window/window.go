@@ -1,8 +1,9 @@
 package window
 
 import (
-	"github.com/sciter-sdk/go-sciter"
 	"runtime"
+
+	"github.com/fynxiu/go-sciter"
 )
 
 type Window struct {
