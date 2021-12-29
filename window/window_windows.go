@@ -44,7 +44,7 @@ func Init() error {
 
 func New(creationFlags sciter.WindowCreationFlag, rect *sciter.Rect) (*Window, error) {
 	if err := Init(); err != nil {
-		return nil, fmt.Error("Sciter Init failed, %v, [%d]", err, win.GetLastError())
+		return nil, fmt.Errorf("Sciter Init failed, %v, [%d]", err, win.GetLastError())
 	}
 	w := new(Window)
 	w.creationFlags = creationFlags
