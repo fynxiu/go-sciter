@@ -13,7 +13,39 @@ import (
 	"github.com/lxn/win"
 )
 
+var prevDPI uint32 = 96
+
+func updateLayoutForDPI(hwnd win.HWND) {
+	dpi := win.GetDpiForWindow(hwnd)
+	if prevDPI == dpi {
+		return
+	}
+	prevDPI = dpi
+	dpiScaled := dpi / 96.0
+	var rect win.RECT
+	win.GetWindowRect(hwnd, &rect)
+	rect.Right = (rect.Right - rect.Left) * int32(dpiScaled)
+	rect.Bottom = (rect.Bottom - rect.Top) * int32(dpiScaled)
+	win.AdjustWindowRect(&rect, win.WS_OVERLAPPED, false)
+}
+
+// Init is called at the start of the application
+func Init() error {
+	setProcessDPIAware := syscall.NewLazyDLL("user32.dll").NewProc("SetProcessDPIAware")
+	if setProcessDPIAware == nil {
+		return nil
+	}
+	status, r, err := setProcessDPIAware.Call()
+	if status == 0 {
+		return fmt.Errorf("exit status %d: %v %v", status, r, err)
+	}
+	return nil
+}
+
 func New(creationFlags sciter.WindowCreationFlag, rect *sciter.Rect) (*Window, error) {
+	if err := Init(); err != nil {
+		return nil, fmt.Error("Sciter Init failed, %v, [%d]", err, win.GetLastError())
+	}
 	w := new(Window)
 	w.creationFlags = creationFlags
 
